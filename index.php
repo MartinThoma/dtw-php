@@ -28,45 +28,7 @@ if (isset($_GET['heartbeat'])) {
     $stmt->execute();
     $datasets = $stmt->fetchAll();
 
-    $results = array();
-
-    foreach ($datasets as $key => $dataset) {
-        $B = $dataset['data'];
-        if ($epsilon > 0) {
-            $B = apply_douglas_peucker(pointLineList($B), $epsilon);
-        } else {
-            $B = pointLineList($B);
-        }
-        $B = scale_and_center(list_of_pointlists2pointlist($B));
-        $results[] = array("dtw" => greedyMatchingDTW($A, $B),
-                           "latex" => $dataset['accepted_formula_id'],
-                           "id" => $dataset['id'],
-                           "latex" => $dataset['formula_in_latex'],
-                           "formula_id" => $dataset['formula_id']);
-    }
-
-    $dtw = array();
-    foreach ($results as $key => $row) {
-        $dtw[$key] = $row['dtw'];
-    }
-    array_multisort($dtw, SORT_ASC, $results);
-    $results = array_filter($results, "maximum_dtw");
-
-    // get only best match for each single symbol
-    $results2 = array();
-    foreach ($results as $key => $row) {
-        if (array_key_exists($row['formula_id'], $results2)) {
-            $results2[$row['formula_id']] = min($results2[$row['formula_id']], $row['dtw']);
-            continue;
-        } else {
-            $results2[$row['formula_id']] = $row['dtw'];
-        }
-    }
-
-    $results = $results2;
-    $results = array_slice($results, 0, 10, true);
-
-    $results = get_probability_from_distance($results);
+    $results = classify($datasets, $A);
     //$results = array("31" => 0.00000123);
     echo json_encode($results);
 }
