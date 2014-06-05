@@ -29,7 +29,6 @@ if (isset($_GET['heartbeat'])) {
     $datasets = $stmt->fetchAll();
 
     $results = classify($datasets, $A);
-    //$results = array("31" => 0.00000123);
     echo json_encode($results);
 }
 
