@@ -290,7 +290,7 @@ function get_probability_from_distance($results) {
     $modified = array();
     foreach ($results as $formula_id => $dtw) {
         if ($dtw == 0) {
-            return array($formula_id => 1);
+            return array(array($formula_id => 1));
         } else {
             $modified[$formula_id] = exp(-$dtw);
             $sum += $modified[$formula_id];

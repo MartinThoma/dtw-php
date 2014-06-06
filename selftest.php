@@ -6,6 +6,7 @@ require_once 'classification.php';
 // Parameters for self-testing
 define("MIN_OCCURENCES", 10);
 define("K_FOLD", 10);
+define("EPSILON", 1);
 
 // Prepare crossvalidation data set
 $crossvalidation = array(
@@ -55,8 +56,6 @@ foreach ($datasets as $key => $dataset) {
     }
 }
 
-// Set parameters for classification
-$epsilon = 0;
 // Start getting validation results
 $classification_accuracy = array();
 echo "\n\n";
@@ -78,8 +77,8 @@ for ($testset=0; $testset < K_FOLD; $testset++) {
     foreach ($crossvalidation[$testset] as $testdata) {
         $start = microtime (true);
         $raw_draw_data = $testdata['data'];
-        if ($epsilon > 0) {
-            $result_path = apply_douglas_peucker(pointLineList($raw_draw_data), $epsilon);
+        if (EPSILON > 0) {
+            $result_path = apply_douglas_peucker(pointLineList($raw_draw_data), EPSILON);
         } else {
             $result_path = pointLineList($raw_draw_data);
         }
@@ -95,7 +94,7 @@ for ($testset=0; $testset < K_FOLD; $testset++) {
             }
         }
 
-        $results = classify($datasets, $A, $epsilon);
+        $results = classify($datasets, $A, EPSILON);
         $end = microtime (true);
         $execution_time[] = $end - $start;
 
@@ -146,6 +145,7 @@ for ($testset=0; $testset < K_FOLD; $testset++) {
 echo "The following ".$symbol_counter." symbols with ".$raw_data_counter." raw dataset ".
      "evaluated to\n";
 echo implode(", ", $symbols)."\n";
+echo "Epsilon: ".EPSILON."\n";
 echo "* Top-1-Classification (".K_FOLD."-fold cross-validated): ".($t1sum/K_FOLD)."\n";
 echo "* Top-10-Classification (".K_FOLD."-fold cross-validated): ".($t10sum/K_FOLD);
 
