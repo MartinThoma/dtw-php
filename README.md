@@ -12,13 +12,13 @@ A (192), B (72), C (98), D (66), E (85), F (74), G (73), H (70), I (17), J (16),
 
 and a classification time of about 4.2 seconds / symbol this classifier got a
 classification accuracy of
-
+Epsilon: 0
 * Top-1-Classification (10-fold cross-validated): 0.8318930300639019
 * Top-10-Classification (10-fold cross-validated): 0.9692571810953939
 
 is achieved by the current DTW classifier. It takes about 4 seconds / symbol
 to classify.
-
+--------------------------------------------------------------------------------
 2014-06-06
 
 The following 122 symbols with 3261 raw dataset evaluated to
@@ -26,3 +26,29 @@ A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z, \r
 Epsilon: 1
 * Top-1-Classification (10-fold cross-validated): 0.8298093065456
 * Top-10-Classification (10-fold cross-validated): 0.97472367019029
+
+--------------------------------------------------------------------------------
+with centering:
+The following 122 symbols with 3261 raw dataset evaluated to
+A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z, \rightarrow, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, \pi, \alpha, \beta, \sum, \sigma, a, b, c, d, e, f, g, h, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z, \Sigma, \gamma, \Gamma, \delta, \Delta, \zeta, \eta, \theta, \Theta, \epsilon, \varepsilon, \iota, \kappa, \varkappa, \lambda, \Lambda, \mu, \nu, \xi, \Pi, \rho, \varrho, \tau, \phi, \Phi, \varphi, \chi, \psi, \Psi, \omega, \Omega, \partial, \int, \cdot, \leq, \geq, <, >, \subset, \supset, \subseteq, \supseteq, \cong, \propto, -, +, \mathbb{R}, \copyright, \checkmark, \nabla, \heartsuit, \frownie, \Frowny, \textasciitilde, \mathbb{Q}
+Epsilon: 0
+* Top-1-Classification (10-fold cross-validated): 0.55391694708207
+* Top-10-Classification (10-fold cross-validated): 0.79319234810808
+-----------
+2014-06-07
+
+The following 122 symbols with 3261 raw dataset evaluated to
+A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z, \rightarrow, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, \pi, \alpha, \beta, \sum, \sigma, a, b, c, d, e, f, g, h, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z, \Sigma, \gamma, \Gamma, \delta, \Delta, \zeta, \eta, \theta, \Theta, \epsilon, \varepsilon, \iota, \kappa, \varkappa, \lambda, \Lambda, \mu, \nu, \xi, \Pi, \rho, \varrho, \tau, \phi, \Phi, \varphi, \chi, \psi, \Psi, \omega, \Omega, \partial, \int, \cdot, \leq, \geq, <, >, \subset, \supset, \subseteq, \supseteq, \cong, \propto, -, +, \mathbb{R}, \copyright, \checkmark, \nabla, \heartsuit, \frownie, \Frowny, \textasciitilde, \mathbb{Q}
+Epsilon: 0
+Center: 
+* Top-1-Classification (10-fold cross-validated): 0.83108778894659
+* Top-10-Classification (10-fold cross-validated): 0.97661017487276
+---
+2014-06-08
+
+The following 122 symbols with 3261 raw dataset evaluated to
+A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z, \rightarrow, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, \pi, \alpha, \beta, \sum, \sigma, a, b, c, d, e, f, g, h, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z, \Sigma, \gamma, \Gamma, \delta, \Delta, \zeta, \eta, \theta, \Theta, \epsilon, \varepsilon, \iota, \kappa, \varkappa, \lambda, \Lambda, \mu, \nu, \xi, \Pi, \rho, \varrho, \tau, \phi, \Phi, \varphi, \chi, \psi, \Psi, \omega, \Omega, \partial, \int, \cdot, \leq, \geq, <, >, \subset, \supset, \subseteq, \supseteq, \cong, \propto, -, +, \mathbb{R}, \copyright, \checkmark, \nabla, \heartsuit, \frownie, \Frowny, \textasciitilde, \mathbb{Q}
+Epsilon: 0
+Center: 
+* Top-1-Classification (10-fold cross-validated): 0.80709536332148
+* Top-10-Classification (10-fold cross-validated): 0.95625144897859

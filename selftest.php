@@ -6,7 +6,8 @@ require_once 'classification.php';
 // Parameters for self-testing
 define("MIN_OCCURENCES", 10);
 define("K_FOLD", 10);
-define("EPSILON", 1);
+define("EPSILON", 0);
+define("CENTER", false);
 
 // Prepare crossvalidation data set
 $crossvalidation = array(
@@ -82,7 +83,8 @@ for ($testset=0; $testset < K_FOLD; $testset++) {
         } else {
             $result_path = pointLineList($raw_draw_data);
         }
-        $A = scale_and_center(list_of_pointlists2pointlist($result_path));
+        $A = scale_and_center(list_of_pointlists2pointlist($result_path),
+                              CENTER);
 
         // Prepare datasets the algorithm may use
         $datasets = array();
@@ -100,8 +102,9 @@ for ($testset=0; $testset < K_FOLD; $testset++) {
 
         reset($results);
         $answer_id = 0;
-        if(is_null($results[0])) {
-            # That should not happen
+        if(count($results) == 0 || is_null($results[0])) {
+            # That should not happen. Threshold of maximum_dtw might be too
+            # high.
             echo "\nRaw_data_id = ".$testdata['id']."\n";
             $answer_id = key($results);
         } else {
@@ -142,11 +145,14 @@ for ($testset=0; $testset < K_FOLD; $testset++) {
     $t10sum += $classification_accuracy[$testset]['a10'];
 }
 
+echo date("Y-m-d\n")."\n";
 echo "The following ".$symbol_counter." symbols with ".$raw_data_counter." raw dataset ".
      "evaluated to\n";
 echo implode(", ", $symbols)."\n";
 echo "Epsilon: ".EPSILON."\n";
+echo "Center: ".CENTER."\n";
 echo "* Top-1-Classification (".K_FOLD."-fold cross-validated): ".($t1sum/K_FOLD)."\n";
-echo "* Top-10-Classification (".K_FOLD."-fold cross-validated): ".($t10sum/K_FOLD);
+echo "* Top-10-Classification (".K_FOLD."-fold cross-validated): ".($t10sum/K_FOLD)."\n";
+
 
 ?>

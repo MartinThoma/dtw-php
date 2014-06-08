@@ -49,11 +49,15 @@ function scale_and_center($pointlist, $center = false) {
 function d($p1, $p2) {
     $dx = $p1["x"] - $p2["x"];
     $dy = $p1["y"] - $p2["y"];
-    return $dx*$dx + $dy*$dy;
+    return $dx*$dx + $dy*$dy; // TODO: try sqrt
 }
 
-function maximum_dtw($var) {
-    return ($var['dtw'] < 20);
+function maximum_dtw($var, $threshold=20) {
+    if ($threshold == 0) {
+        return true;
+    } else {
+        return ($var['dtw'] < $threshold);
+    }
 }
 
 /**
@@ -285,6 +289,9 @@ function get_dimensions($pointlist) {
 }
 
 function get_probability_from_distance($results) {
+    if (count($results) == 0) {
+        return array();
+    }
     // check if one distance is 0 and meanwhile build sum of distances.
     $sum = 0.0;
     $modified = array();
@@ -350,7 +357,6 @@ function classify($datasets, $A, $epsilon = 0) {
     foreach ($results as $key => $row) {
         if (array_key_exists($row['formula_id'], $results2)) {
             $results2[$row['formula_id']] = min($results2[$row['formula_id']], $row['dtw']);
-            continue;
         } else {
             $results2[$row['formula_id']] = $row['dtw'];
         }
